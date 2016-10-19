@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mutitypetemplates" default="compile.module.mutitypetemplates">
+  <dirname property="module.mutitypetemplates.basedir" file="${ant.file.module_mutitypetemplates}"/>
+  
+  <property name="module.jdk.home.mutitypetemplates" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mutitypetemplates" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mutitypetemplates" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mutitypetemplates" value="-encoding UTF-8 -source 1.6 -target 1.6 ${compiler.args}"/>
+  
+  <property name="mutitypetemplates.output.dir" value="${module.mutitypetemplates.basedir}/out/production/MutiTypeTemplates"/>
+  <property name="mutitypetemplates.testoutput.dir" value="${module.mutitypetemplates.basedir}/out/test/MutiTypeTemplates"/>
+  
+  <path id="mutitypetemplates.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mutitypetemplates.module.production.classpath">
+    <path refid="${module.jdk.classpath.mutitypetemplates}"/>
+  </path>
+  
+  <path id="mutitypetemplates.runtime.production.module.classpath">
+    <pathelement location="${mutitypetemplates.output.dir}"/>
+  </path>
+  
+  <path id="mutitypetemplates.module.classpath">
+    <path refid="${module.jdk.classpath.mutitypetemplates}"/>
+    <pathelement location="${mutitypetemplates.output.dir}"/>
+  </path>
+  
+  <path id="mutitypetemplates.runtime.module.classpath">
+    <pathelement location="${mutitypetemplates.testoutput.dir}"/>
+    <pathelement location="${mutitypetemplates.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mutitypetemplates">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mutitypetemplates">
+    <patternset refid="excluded.from.module.mutitypetemplates"/>
+  </patternset>
+  
+  <path id="mutitypetemplates.module.sourcepath">
+    <dirset dir="${module.mutitypetemplates.basedir}">
+      <include name="src"/>
+      <include name="resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mutitypetemplates" depends="compile.module.mutitypetemplates.production,compile.module.mutitypetemplates.tests" description="Compile module MutiTypeTemplates"/>
+  
+  <target name="compile.module.mutitypetemplates.production" depends="register.custom.compilers" description="Compile module MutiTypeTemplates; production classes">
+    <mkdir dir="${mutitypetemplates.output.dir}"/>
+    <javac2 destdir="${mutitypetemplates.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mutitypetemplates}/javac">
+      <compilerarg line="${compiler.args.mutitypetemplates}"/>
+      <bootclasspath refid="mutitypetemplates.module.bootclasspath"/>
+      <classpath refid="mutitypetemplates.module.production.classpath"/>
+      <src refid="mutitypetemplates.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mutitypetemplates"/>
+    </javac2>
+    
+    <copy todir="${mutitypetemplates.output.dir}">
+      <fileset dir="${module.mutitypetemplates.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.mutitypetemplates.basedir}/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mutitypetemplates.tests" depends="register.custom.compilers,compile.module.mutitypetemplates.production" description="compile module MutiTypeTemplates; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.mutitypetemplates" description="cleanup module">
+    <delete dir="${mutitypetemplates.output.dir}"/>
+    <delete dir="${mutitypetemplates.testoutput.dir}"/>
+  </target>
+  
+  <property name="mutitypetemplates.plugin.path.jar" value="${module.mutitypetemplates.basedir}/MutiTypeTemplates.jar"/>
+  
+  <!-- Build archive for plugin 'MutiTypeTemplates' -->
+  <target name="plugin.build.jar.mutitypetemplates" depends="compile.module.mutitypetemplates" description="Build plugin archive for module &#39;MutiTypeTemplates&#39;">
+    <jar destfile="${mutitypetemplates.plugin.path.jar}" duplicate="preserve">
+      <zipfileset dir="${module.mutitypetemplates.basedir}/out/production/MutiTypeTemplates"/>
+      <zipfileset file="${module.mutitypetemplates.basedir}/resources/META-INF/plugin.xml" prefix="META-INF"/>
+      <manifest>
+        <attribute name="Created-By" value="IntelliJ IDEA"/>
+        <attribute name="Manifest-Version" value="1.0"/>
+      </manifest>
+    </jar>
+  </target>
+</project>

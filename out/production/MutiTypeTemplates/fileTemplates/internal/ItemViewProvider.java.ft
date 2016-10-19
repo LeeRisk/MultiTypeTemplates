@@ -1,0 +1,32 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import me.drakeet.multitype.ItemViewProvider;
+
+#parse("File Header.java")
+public class ${NAME}
+    extends ItemViewProvider<MULTITYPE_TEMPLATE_ITEM_CLASS, ${NAME}.ViewHolder> {
+
+    @NonNull @Override
+    protected ViewHolder onCreateViewHolder(
+        @NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+        View root = inflater.inflate(R.layout.item_MULTITYPE_TEMPLATE_ITEM_NAME, parent, false);
+        return new ViewHolder(root);
+    }
+
+    @Override
+    protected void onBindViewHolder(
+        @NonNull ViewHolder holder, @NonNull MULTITYPE_TEMPLATE_ITEM_CLASS MULTITYPE_TEMPLATE_ITEM_NAME) {
+
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+}
