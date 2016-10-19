@@ -1,5 +1,5 @@
 # MultiTypeTemplates
-An intellij idea plug to create MultiType Item and ItemViewProvider easily.
+An intellij idea plugin to create MultiType Item and ItemViewProvider easily.
 
 #### Usage
 
