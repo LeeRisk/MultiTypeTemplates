@@ -54,5 +54,5 @@ public class CategoryViewProvider
 
 ### Thanks
 
-- [drakeet/MultiType](https://github.com/drakeet/MultiType)
+- **[drakeet/MultiType](https://github.com/drakeet/MultiType)**
  An Android library to retrofit multiple item view types
