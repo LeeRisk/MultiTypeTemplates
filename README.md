@@ -3,11 +3,11 @@ An intellij idea plugin for Android to generate `MultiType` `Item` and `ItemView
 
 ### Obtaining & Installation
 
-The plugin is distributed through the Plugin Manager in IntelliJ. https://plugins.jetbrains.com/plugin/9202
+- The plugin is distributed through the Plugin Manager in IntelliJ. https://plugins.jetbrains.com/plugin/9202
 
-Search word `MultiTypeTemplates`: On Mac: `Preference -> Plugins -> Browse repositories`
+- Search word `MultiTypeTemplates`: On Mac: `Preference -> Plugins -> Browse repositories`
 
-Or you can download the jar file from [MultiTypeTemplates.jar](https://github.com/drakeet/MultiTypeTemplates/releases),
+- Or you can download the jar file from [MultiTypeTemplates.jar](https://github.com/drakeet/MultiTypeTemplates/releases),
 then `Preferences -> Plugin -> Install plugin from disk...`
 
 ### Usage
