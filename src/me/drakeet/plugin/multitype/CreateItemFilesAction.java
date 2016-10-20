@@ -42,10 +42,9 @@ public class CreateItemFilesAction extends JavaCreateTemplateInPackageAction<Psi
 
     @Override
     protected void buildDialog(final Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
-        builder
-            .setTitle("Create Item and ItemViewProvider")
-            .addKind("Class", PlatformIcons.CLASS_ICON,
-                JavaTemplateUtil.INTERNAL_CLASS_TEMPLATE_NAME);
+        builder.setTitle("Create Item and ItemViewProvider")
+               .addKind("Class", PlatformIcons.CLASS_ICON,
+                   JavaTemplateUtil.INTERNAL_CLASS_TEMPLATE_NAME);
 
         builder.setValidator(new InputValidatorEx() {
             @Override
@@ -136,7 +135,6 @@ public class CreateItemFilesAction extends JavaCreateTemplateInPackageAction<Psi
     @Override
     protected void postProcess(PsiClass createdElement, String templateName, Map<String, String> customProperties) {
         super.postProcess(createdElement, templateName, customProperties);
-
         moveCaretAfterNameIdentifier(createdElement);
     }
 }
