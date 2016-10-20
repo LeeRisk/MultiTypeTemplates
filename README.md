@@ -1,6 +1,8 @@
 # MultiTypeTemplates
 An intellij idea plugin for Android to generate `MultiType` `Item` and `ItemViewProvider` easily.
 
+![](http://ww1.sinaimg.cn/large/86e2ff85gw1f8ylqaegmoj203k03k3yg.jpg) ![](http://ww4.sinaimg.cn/large/86e2ff85gw1f8ylrw6vd9j203k03k747.jpg)
+
 ### Obtaining & Installation
 
 - The plugin is distributed through the Plugin Manager in IntelliJ. https://plugins.jetbrains.com/plugin/9202
