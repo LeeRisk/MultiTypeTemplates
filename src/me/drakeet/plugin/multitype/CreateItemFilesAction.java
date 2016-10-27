@@ -1,5 +1,6 @@
 package me.drakeet.plugin.multitype;
 
+import com.google.common.base.CaseFormat;
 import com.intellij.ide.IdeBundle;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.ide.actions.JavaCreateTemplateInPackageAction;
@@ -15,6 +16,7 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNameHelper;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
@@ -22,7 +24,8 @@ import com.intellij.util.PlatformIcons;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
-import static java.lang.String.valueOf;
+import static com.google.common.base.CaseFormat.LOWER_CAMEL;
+import static com.google.common.base.CaseFormat.LOWER_UNDERSCORE;
 
 /**
  * @author drakeet
@@ -103,23 +106,23 @@ public class CreateItemFilesAction extends JavaCreateTemplateInPackageAction<Psi
     }
 
 
-    private void onProcessItemViewProvider(final PsiDirectory dir, final String itemName, final PsiClass itemClass) {
-        final Document document = PsiDocumentManager.getInstance(itemClass.getProject())
-            .getDocument(itemClass.getContainingFile());
-        char firstChar = itemName.charAt(0);
-        String stringFirst = valueOf(firstChar).toLowerCase();
-
-        final String varItemName;
-        if (itemName.length() > 1) {
-            varItemName = stringFirst + itemName.substring(1, itemName.length());
-        } else {
-            varItemName = stringFirst;
+    private void onProcessItemViewProvider(final PsiDirectory dir, final String className, final PsiClass itemClass) {
+        PsiFile file = itemClass.getContainingFile();
+        final PsiDocumentManager manager = PsiDocumentManager.getInstance(itemClass.getProject());
+        final Document document = manager.getDocument(file);
+        if (document == null) {
+            return;
         }
+
         new WriteCommandAction.Simple(itemClass.getProject()) {
             @Override protected void run() throws Throwable {
+                manager.doPostponedOperationsAndUnblockDocument(document);
                 document.setText(document.getText()
-                    .replace("MULTITYPE_TEMPLATE_ITEM_CLASS", itemName)
-                    .replace("MULTITYPE_TEMPLATE_ITEM_NAME", varItemName));
+                    .replace("MULTITYPE_ITEM_CLASS", className)
+                    .replace("MULTITYPE_ITEM_LOWER_NAME",
+                        CaseFormat.UPPER_CAMEL.to(LOWER_UNDERSCORE, className))
+                    .replace("MULTITYPE_ITEM_NAME",
+                        CaseFormat.UPPER_CAMEL.to(LOWER_CAMEL, className)));
                 CodeStyleManager.getInstance(itemClass.getProject()).reformat(itemClass);
             }
         }.execute();
@@ -135,6 +138,7 @@ public class CreateItemFilesAction extends JavaCreateTemplateInPackageAction<Psi
     @Override
     protected void postProcess(PsiClass createdElement, String templateName, Map<String, String> customProperties) {
         super.postProcess(createdElement, templateName, customProperties);
+
         moveCaretAfterNameIdentifier(createdElement);
     }
 }

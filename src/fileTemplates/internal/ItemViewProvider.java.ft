@@ -8,18 +8,18 @@ import me.drakeet.multitype.ItemViewProvider;
 
 #parse("File Header.java")
 public class ${NAME}
-    extends ItemViewProvider<MULTITYPE_TEMPLATE_ITEM_CLASS, ${NAME}.ViewHolder> {
+    extends ItemViewProvider<MULTITYPE_ITEM_CLASS, ${NAME}.ViewHolder> {
 
     @NonNull @Override
     protected ViewHolder onCreateViewHolder(
         @NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View root = inflater.inflate(R.layout.item_MULTITYPE_TEMPLATE_ITEM_NAME, parent, false);
+        View root = inflater.inflate(R.layout.item_MULTITYPE_ITEM_LOWER_NAME, parent, false);
         return new ViewHolder(root);
     }
 
     @Override
     protected void onBindViewHolder(
-        @NonNull ViewHolder holder, @NonNull MULTITYPE_TEMPLATE_ITEM_CLASS MULTITYPE_TEMPLATE_ITEM_NAME) {
+        @NonNull ViewHolder holder, @NonNull MULTITYPE_ITEM_CLASS MULTITYPE_ITEM_NAME) {
 
     }
 

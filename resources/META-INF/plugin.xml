@@ -1,18 +1,17 @@
 <idea-plugin version="2">
     <id>>me.drakeet.plugin.multitype</id>
     <name>MultiTypeTemplates</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor email="drakeet.me@gmail.com" url="https://drakeet.me">drakeet</vendor>
 
     <description><![CDATA[
       An intellij idea plug to create MultiType Item and ItemViewProvider easily.<br/><br/>
       P.S. MultiType: An Android library to retrofit multiple item view types
-      https://github.com/drakeet/MultiType
+      <a href="https://github.com/drakeet/MultiType">https://github.com/drakeet/MultiType</a>
     ]]></description>
 
     <change-notes><![CDATA[
-      P.S. MultiType: An Android library to retrofit multiple item view types
-      https://github.com/drakeet/MultiType
+      Fixed: Document is locked by write PSI operations.
     ]]>
     </change-notes>
 
